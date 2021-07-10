@@ -1,32 +1,31 @@
+<template>
+  <footer class="footer-container">
+    <div>
+      Developed by{{ ' ' }}
+      <BLink href="https://noop.app/" target="_blank">
+        Noop Inc.
+      </BLink>
+    </div>
+    <div class="divider" />
+    <div>
+      Leveraging the{{ ' ' }}
+      <BLink href="https://noop.app/" target="_blank"> Noop </BLink>{{ ' ' }}
+      Platform
+    </div>
+  </footer>
+</template>
+
 <script>
 import { BLink } from 'bootstrap-vue'
 export default {
   name: 'Footer',
-
-  render () {
-    return (
-      <footer class='footer-container'>
-        <div>
-          Developed by{' '}
-          <BLink href='https://noop.app/' target='_blank'>
-            Noop Inc.
-          </BLink>
-        </div>
-        <div class='divider' />
-        <div>
-          Leveraging the{' '}
-          <BLink href='https://noop.app/' target='_blank'>
-            Noop
-          </BLink>{' '}
-          Platform
-        </div>
-      </footer>
-    )
+  components: {
+    BLink
   }
 }
 </script>
 
-<style lang="scss">
+<style>
 .footer-container {
   text-align: center;
   position: fixed;
@@ -36,38 +35,36 @@ export default {
   font-size: 12px;
   line-height: 12px;
   margin: 9px 0;
+}
 
-  div {
-    display: inline-block;
-    font-weight: 400;
-  }
+.footer-container div {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--light);
+  text-shadow: 1px 1px var(--dark);
+}
 
-  div:first-of-type {
-    padding-right: 16px;
-  }
+.footer-container div:first-of-type {
+  padding-right: 16px;
+}
 
-  div:last-of-type {
-    padding-left: 16px;
-  }
+.footer-container div:last-of-type {
+  padding-left: 16px;
+}
 
-  .divider {
-    height: 12px;
-    vertical-align: top;
-    border-right: var(--light) solid 1px;
-  }
+.footer-container .divider {
+  height: 12px;
+  vertical-align: top;
+  border-right: var(--light) solid 1px;
+}
 
-  div,
-  a {
-    color: var(--light);
-    text-shadow: 1px 1px var(--dark);
-  }
+.footer-container a {
+  color: var(--light);
+  text-shadow: 1px 1px var(--dark);
+  font-weight: 600;
+}
 
-  a {
-    font-weight: 600;
-  }
-
-  a:hover {
-    color: white;
-  }
+.footer-container a:hover {
+  color: white;
 }
 </style>

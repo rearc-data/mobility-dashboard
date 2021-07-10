@@ -1,8 +1,23 @@
+<template>
+  <BTable
+    v-if="dataset"
+    hover
+    head-variant="light"
+    sticky-header="100%"
+    :items="items"
+    :fields="fields"
+    :style="{ marginBottom: 0 }"
+  />
+</template>
+
 <script>
 import { BTable } from 'bootstrap-vue'
-import moment from 'moment'
+
 export default {
   name: 'Table',
+  components: {
+    BTable
+  },
   props: {
     dataset: {
       type: Object,
@@ -33,7 +48,9 @@ export default {
       if (this.dataset) {
         const data = [
           {
-            date: moment(this.dataset.data[0].date).format('MMMM Do, YYYY'),
+            date: new Date(this.dataset.data[0].date).toLocaleDateString([], {
+              dateStyle: 'long'
+            }),
             value: `${this.dataset.data[0].value}%`,
             _rowVariant: 'warning'
           }
@@ -50,7 +67,9 @@ export default {
             color = 'warning'
           }
           data.push({
-            date: moment(datum.date).format('MMMM Do, YYYY'),
+            date: new Date(datum.date).toLocaleDateString([], {
+              dateStyle: 'long'
+            }),
             value: `${datum.value}%`,
             _rowVariant: color
           })
@@ -66,23 +85,11 @@ export default {
   },
   updated () {
     this.items = this.formatTable()
-  },
-  render () {
-    return this.dataset ? (
-      <BTable
-        hover
-        head-variant='light'
-        sticky-header='100%'
-        items={this.items}
-        fields={this.fields}
-        style='margin-bottom: 0;'
-      />
-    ) : null
   }
 }
 </script>
 
-<style lang="scss">
+<style>
 .b-table-sticky-header > .table.b-table > thead > tr > th {
   border-top: 0;
 }

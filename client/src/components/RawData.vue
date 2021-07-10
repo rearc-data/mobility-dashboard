@@ -1,6 +1,13 @@
+<template>
+  <pre v-if="dataset" class="raw-data-container">
+    <code class="language-json" ref="code" />
+  </pre>
+</template>
+
 <script>
 import Prism from 'prismjs'
 import 'prismjs/components/prism-json.min'
+
 export default {
   name: 'RawData',
   props: {
@@ -22,40 +29,34 @@ export default {
   },
   updated () {
     this.$refs.code.innerHTML = this.formatRawData()
-  },
-  render () {
-    return this.dataset ? (
-      <pre class='raw-data-container'>
-        <code class='language-json' ref='code' />
-      </pre>
-    ) : null
   }
 }
 </script>
 
-<style lang="scss">
+<style>
 .raw-data-container {
   margin-bottom: 0;
   padding: 12px;
 }
 
-.language-json {
-  .token {
-    text-shadow: 0 -0.1em 0.2em white;
-    background: none;
-  }
-  .token.punctuation,
-  .token.operator {
-    color: var(--secondary);
-  }
-  .token.property {
-    color: var(--cyan);
-  }
-  .token.string {
-    color: var(--orange);
-  }
-  .token.number {
-    color: var(--green);
-  }
+.language-json .token {
+  text-shadow: 0 -0.1em 0.2em white;
+  background: none;
+}
+
+.language-json .token.punctuation, .language-json .token.operator {
+  color: var(--secondary);
+}
+
+.language-json .token.property {
+  color: var(--cyan);
+}
+
+.language-json .token.string {
+  color: var(--orange);
+}
+
+.language-json .token.number {
+  color: var(--green);
 }
 </style>

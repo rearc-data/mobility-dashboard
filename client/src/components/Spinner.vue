@@ -1,9 +1,24 @@
+<template>
+  <section
+    v-if="mobilityLoading || metaLoading"
+    class="loading-spinner-container"
+  >
+    <div class="spinner-backdrop" />
+    <div class="spinner-position">
+      <GridLoader :color="`var(--${color})`" :size="`${size}px`" />
+    </div>
+  </section>
+</template>
+
 <script>
 import GridLoader from 'vue-spinner/src/GridLoader.vue'
 import { mapState } from 'vuex'
 
 export default {
   name: 'LoadingSpinner',
+  components: {
+    GridLoader
+  },
   props: {
     size: {
       type: Number,
@@ -17,21 +32,11 @@ export default {
   computed: {
     ...mapState('mobility', { mobilityLoading: state => state.loading }),
     ...mapState('meta', { metaLoading: state => state.loading })
-  },
-  render () {
-    return this.mobilityLoading || this.metaLoading ? (
-      <section class='loading-spinner-container'>
-        <div class='spinner-backdrop' />
-        <div class='spinner-position'>
-          <GridLoader color={`var(--${this.color})`} size={`${this.size}px`} />
-        </div>
-      </section>
-    ) : null
   }
 }
 </script>
 
-<style lang="scss">
+<style>
 .loading-spinner-container {
   position: fixed;
   top: 0;
@@ -39,21 +44,22 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 2000;
-  .spinner-backdrop {
-    opacity: 0.5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #000;
-  }
-  > .spinner-position {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+}
+
+.loading-spinner-container .spinner-backdrop {
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+}
+.loading-spinner-container > .spinner-position {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
